@@ -64,7 +64,6 @@ Or
 php artisan vendor:publish
 ~~~
 
-### Usage
 ### Structure
 ##### Assets
 ```
@@ -87,6 +86,10 @@ php artisan vendor:publish
         └── anothertheme/
 
 ```
+
+
+### Usage
+
 ##### Call views
 
 Using similar on [views document](http://laravel.com/docs/5.1/views). When you return view if view file not exist in theme folder, view file will be load in resrouces/views.
