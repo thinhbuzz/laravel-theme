@@ -107,15 +107,26 @@ OR
 ```php
 app('theme')->set($themeName)
 ```
+
 OR
 
 ```php
 setTheme($themeName);//function helper
 ```
+
 OR
 
 ```php
 Theme::set($themeName);//use facade
+```
+
+##### Helper
+
+```php
+Theme::client();//return MobileDetect object
+Theme::pathTheme($name);//return path of theme or current theme
+Theme::currentTheme();//return name of current theme
+Theme::reset();//reset theme to default config
 ```
 
 ## Contribute

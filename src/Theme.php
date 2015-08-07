@@ -77,9 +77,9 @@ class Theme
      *
      * @return string
      */
-    public function pathTheme()
+    public function pathTheme($theme = null)
     {
-        $name = $this->currentTheme();
+        $name = is_null($theme) ? $this->currentTheme() : $theme;
         return base_path(config('theme.view_path')) . '/' . $name;
     }
 
