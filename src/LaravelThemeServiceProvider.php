@@ -26,7 +26,7 @@ class LaravelThemeServiceProvider extends ServiceProvider
 
     protected function bootConfig()
     {
-        $path = __DIR__ . '/config.php';
+        $path = __DIR__ . '/../config/config.php';
         $this->mergeConfigFrom($path, 'theme');
         $this->publishes([$path => config_path('theme.php')]);
     }

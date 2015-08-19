@@ -23,7 +23,10 @@
   },
   "autoload": {
     "psr-4": {
-      "Buzz\\Laravel-theme\\": "src"
-    }
+      "Buzz\\LaravelTheme\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
   }
 }

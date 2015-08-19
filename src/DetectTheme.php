@@ -14,9 +14,9 @@ class DetectTheme extends MobileDetect
     public function __construct($app, $currentTheme)
     {
         parent::__construct();
-        if (config('themes.detect')) {
-            if ($this->getTheme() != $currentTheme && !$app['session']->get('themes.force'))
-                $app['session']->set('themes.name', $this->getTheme());
+        if (config('theme.detect')) {
+            if ($this->getTheme() != $currentTheme && !$app['session']->get('theme.force'))
+                $app['session']->set('theme.name', $this->getTheme());
         }
     }
 
@@ -28,9 +28,9 @@ class DetectTheme extends MobileDetect
     public function getTheme()
     {
         if ($this->isMobile())
-            return config('themes.themes.mobile');
+            return config('theme.themes.mobile');
         elseif ($this->isTablet())
-            return config('themes.themes.tablet');
-        return config('themes.themes.pc');
+            return config('theme.themes.tablet');
+        return config('theme.themes.pc');
     }
 }
