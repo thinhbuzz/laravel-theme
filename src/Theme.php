@@ -65,22 +65,22 @@ class Theme
      */
     public function set($name)
     {
-        $path = base_path(config('theme.view_path')) . '/' . $name;
-        if (!file_exists($path))
-            return;
+        $path = realpath(base_path(config('theme.view_path')) . '/' . $name);
+        if (!$path)
+            throw new ThemeNotFoundExceptions();
         $this->app['session']->set('theme.name', $name);
         $this->app['session']->set('theme.force', true);
     }
 
     /**
-     * Return path of current theme
+     * Return path of theme name or current theme
      *
      * @return string
      */
     public function pathTheme($theme = null)
     {
         $name = is_null($theme) ? $this->currentTheme() : $theme;
-        return base_path(config('theme.view_path')) . '/' . $name;
+        return realpath(base_path(config('theme.view_path') . '/' . $name));
     }
 
     /**
