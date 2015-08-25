@@ -1,34 +1,31 @@
-# Themes management package for Laravel 5.* 
-
+# Package quản lý theme cho Laravel 5.*
 
 > Detect device use package  [serbanghita/Mobile-Detect](https://github.com/serbanghita/Mobile-Detect).
+> If you want to be simple, use a version 1.
+> Note: v2.* switch language to vietnamese
 
-## Installation
-
-Add the following line to the `require` section of `composer.json`:
+## Cài đặt
+Mở file `composer.json` và thêm vào `require`:
 
 ```json
 {
     "require": {
-        "buzz/laravel-theme": "1.*"
+        "buzz/laravel-theme": "2.*"
     }
 }
 ```
 
-OR
+Hoặc chạy lệnh sau:
 
-Require this package with composer:
 ```
 composer require buzz/laravel-theme
 ```
 
-Update your packages with ```composer update``` or install with ```composer install```.
-
-## Laravel 5
+Chạy lệnh ```composer update``` hoặc ```composer install``` để hoàn thành cài đặt package.
 
 ### Setup
 
-Add ServiceProvider, Facade to the file `app/config/app.php`.
+Mở file `app/config/app.php` và thêm ServiceProvider, Facade như sau.
 
 ```
 'providers' => [
@@ -50,21 +47,21 @@ Add ServiceProvider, Facade to the file `app/config/app.php`.
 ],
 ```
 
-### Configuration
+### Cấu hình
 
-Publish config using artisan CLI.
+Tạo file cấu hình ``config/theme.php`` bằng lệnh sau:
 
 ~~~
 php artisan vendor:publish --provider="Buzz\LaravelTheme\LaravelThemeServiceProvider"
 ~~~
 
-Or
+hoặc
 
 ~~~
 php artisan vendor:publish
 ~~~
 
-### Structure
+### Cấu trúc
 ##### Assets
 ```
 ├── public/
@@ -88,50 +85,50 @@ php artisan vendor:publish
 ```
 
 
-### Usage
+## Sử dụng
 
-##### Call views
+### Gọi view
 
-Using similar on [views document](http://laravel.com/docs/5.1/views). When you return view if view file not exist in theme folder, view file will be load in resrouces/views.
+Tương tự như việc sử dụng view mặc định của laravel là dùng ``View::make`` hoặc ``view()``, xem thêm tại [views document](http://laravel.com/docs/5.1/views). Nếu khi gọi view mà view đó không tồn tại trong ``resrouces/themes`` thì sẽ được gọi đến thư mục ``resrouces/views``.
 
-##### Theme assets
+### Theme assets
 
-Use themeAsset() replace for asset() when call to asset of theme
+Dùng ``themeAsset()`` thay cho ``asset()`` khi gọi asses cho theme, ví dụ:
 
 ```php
 <link rel="stylesheet" href="{!! themeAsset('css/bootstrapt.css') !!}">
 //render <link rel="stylesheet" href="http://domain/themes/theme-name/css/bootstrapt.css">
 ```
 
-##### Change theme
+### Thay đổi theme
 
-OR
+Bạn có thể thay đổi theme bằng các cách sau:
 
 ```php
 app('theme')->set($themeName)
 ```
 
-OR
+Hoặc
 
 ```php
 setTheme($themeName);//function helper
 ```
 
-OR
+Hoặc
 
 ```php
 Theme::set($themeName);//use facade
 ```
 
-##### Helper
+##### Các hàm hỗ trợ
 
 ```php
-Theme::client();//return MobileDetect object
-Theme::pathTheme($name);//return path of theme or current theme
-Theme::currentTheme();//return name of current theme
-Theme::reset();//reset theme to default config
+Theme::client();//Trả về 1 đối tượng MobileDetect
+Theme::pathTheme($name);//trả về đường dẫn của thư mục theme hiện tại hoặc theo tên theme truyền vào
+Theme::currentTheme();//trả về tên của theme hiện tại
+Theme::reset();//đặt lại theme mặc định
 ```
 
-## Contribute
 
-https://github.com/thinhbuzz/laravel-theme/pulls
+
+

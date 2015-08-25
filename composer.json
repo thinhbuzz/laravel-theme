@@ -1,6 +1,6 @@
 {
   "name": "buzz/laravel-theme",
-  "description": "Themes management package for Laravel 5.* ",
+  "description": "Package quản lý theme cho Laravel 5.*",
   "keywords": [
     "laravel",
     "theme",
@@ -19,6 +19,7 @@
   "require": {
     "php": ">=5.4.0",
     "illuminate/support": "5.0.*|5.1.*",
+    "illuminate/routing": "5.0.*|5.1.*",
     "mobiledetect/mobiledetectlib": "2.*"
   },
   "autoload": {

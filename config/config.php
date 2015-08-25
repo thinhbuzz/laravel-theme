@@ -1,27 +1,39 @@
 <?php
 return [
     /*
-     * detection device for client
+     * Chỉ định có tự động chuyển đổi giao diện hay không (mobile, tablet, pc)
      * */
-    'detect'=>true,
+    'detect'        => true,
     /*
-     * Folder contains all theme
+     * Thư mục chứa themes, được tính từ ngang hàng với thư mục app
      * */
-    'view_path'=>'resources/themes',
+    'view_path'     => 'resources/themes',
     /*
-     * Folder contains all asset off theme
+     * Thư mục chứa assets của theme, được tính từ ngang hàng index.php (nằm trong public)
      * */
-    'assets_path'=>'themes',
+    'assets_path'   => 'themes',
     /*
-     * Default theme
+     * Theme mặc định
      * */
-    'default_theme'=>'web',
+    'default_theme' => 'web',
     /*
-     * Used when detect device is enabled
+     * Chỉ định theme cho tự động chuyển đổi giao diện
      * */
-    'themes'=>[
-        'mobile'=>'mobile',
-        'tablet'=>'tablet',
-        'pc'=>'web',
+    'themes'        => [
+        'mobile' => 'mobile_theme_name',
+        'tablet' => 'tablet_theme_name',
+        'pc'     => 'web_theme_name',
+    ],
+    /*
+     * Chỉ định theme theo uri, không ảnh hưởng đến theme mặc định
+     * */
+    'uri'           => [
+        'theme_name' => 'uri_with_regex'
+    ],
+    /*
+     * Chỉ định theme theo prefix (sử dụng Route::group), không ảnh hưởng đến theme mặc định
+     * */
+    'prefix'        => [
+        'theme_name' => 'prefix_with_regex'
     ]
 ];

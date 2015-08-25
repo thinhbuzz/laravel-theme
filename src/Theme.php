@@ -19,6 +19,13 @@ class Theme
     protected $detect;
 
     /**
+     * Route info.
+     *
+     * @var \Illuminate\Routing\Route
+     */
+    protected $routeInfo;
+
+    /**
      * @param $app  \Illuminate\Contracts\Foundation\Application
      */
     public function __construct($app)
@@ -80,7 +87,10 @@ class Theme
     public function pathTheme($theme = null)
     {
         $name = is_null($theme) ? $this->currentTheme() : $theme;
-        return realpath(base_path(config('theme.view_path') . '/' . $name));
+        $path = realpath(base_path(config('theme.view_path') . '/' . $name));
+        if (!$path)
+            throw new ThemeNotFoundExceptions();
+        return $path;
     }
 
     /**
