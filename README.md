@@ -55,7 +55,7 @@ Add ServiceProvider, Facade to the file `app/config/app.php`.
 Publish config using artisan CLI.
 
 ~~~
-php artisan vendor:publish --provider="Teepluss\Theme\ThemeServiceProvider"
+php artisan vendor:publish --provider="Buzz\LaravelTheme\LaravelThemeServiceProvider"
 ~~~
 
 Or
