@@ -25,7 +25,7 @@ Chạy lệnh ```composer update``` hoặc ```composer install``` để hoàn th
 
 ### Setup
 
-Mở file `app/config/app.php` và thêm ServiceProvider, Facade như sau.
+Mở file `app/config/app.php` và thêm ServiceProvider
 
 ```
 'providers' => [
@@ -36,7 +36,7 @@ Mở file `app/config/app.php` và thêm ServiceProvider, Facade như sau.
     'Buzz\LaravelTheme\LaravelThemeServiceProvider',
 ],
 ```
-
+Thêm Facade như sau (chỉ phải làm khi `auto_alias => false`):
 ```
 'aliases' => [
     //.....

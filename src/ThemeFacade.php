@@ -10,5 +10,8 @@ class ThemeFacade extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor(){ return 'theme'; }
+    protected static function getFacadeAccessor()
+    {
+        return 'theme';
+    }
 }

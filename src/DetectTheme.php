@@ -14,9 +14,9 @@ class DetectTheme extends MobileDetect
     public function __construct($app, $currentTheme)
     {
         parent::__construct();
-        if (config('theme.detect')) {
-            if ($this->getTheme() != $currentTheme && !$app['session']->get('theme.force'))
-                $app['session']->set('theme.name', $this->getTheme());
+        if ($app->config->get('theme.detect')) {
+            if ($this->getTheme() != $currentTheme && !$app->session->get('theme.force'))
+                $app->session->set('theme.name', $this->getTheme());
         }
     }
 

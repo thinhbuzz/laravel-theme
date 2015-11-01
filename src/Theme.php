@@ -26,11 +26,19 @@ class Theme
     protected $routeInfo;
 
     /**
+     * Package config.
+     *
+     * @var \Illuminate\Contracts\Config\Repository
+     */
+    protected $config;
+
+    /**
      * @param $app  \Illuminate\Contracts\Foundation\Application
      */
     public function __construct($app)
     {
         $this->app = $app;
+        $this->config = $app->config;
         $this->loadSession();
     }
 
@@ -66,15 +74,14 @@ class Theme
      *
      * @param $name
      *
-     * @throws ThemeNotFoundExceptions
+     * @throws ThemeNotFoundException
      *
      * @return void
      */
     public function set($name)
     {
-        $path = realpath(base_path(config('theme.view_path')) . '/' . $name);
-        if (!$path)
-            throw new ThemeNotFoundExceptions();
+        $path = realpath(base_path($this->config->get('theme.view_path')) . '/' . $name);
+        $this->checkPathTheme($path);
         $this->app['session']->set('theme.name', $name);
         $this->app['session']->set('theme.force', true);
     }
@@ -82,15 +89,15 @@ class Theme
     /**
      * Return path of theme name or current theme
      *
+     * @throws ThemeNotFoundException
+     *
      * @return string
      */
     public function pathTheme($theme = null)
     {
         $name = is_null($theme) ? $this->currentTheme() : $theme;
-        $path = realpath(base_path(config('theme.view_path') . '/' . $name));
-        if (!$path)
-            throw new ThemeNotFoundExceptions();
-        return $path;
+        $path = realpath(base_path($this->config->get('theme.view_path') . '/' . $name));
+        return $this->checkPathTheme($path);
     }
 
     /**
@@ -107,7 +114,18 @@ class Theme
      */
     private function loadDefaultSession()
     {
-        $this->app['session']->set('theme.name', config('theme.default_theme'));
+        $this->app['session']->set('theme.name', $this->config->get('theme.default_theme'));
         $this->app['session']->set('theme.force', false);
+    }
+
+    protected function checkPathTheme($path)
+    {
+        if ($path === false) {
+            if ($this->config->get('theme.exception') === true)
+                throw new ThemeNotFoundException;
+            else
+                return false;
+        }
+        return $path;
     }
 }

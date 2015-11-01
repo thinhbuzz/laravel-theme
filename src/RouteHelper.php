@@ -22,7 +22,7 @@ class RouteHelper
      */
     public function getCurrentRoute()
     {
-        return $this->app['routes']->match($this->app['request']);
+        return $this->app->routes->match($this->app->request);
     }
 
 }

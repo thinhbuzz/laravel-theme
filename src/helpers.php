@@ -3,7 +3,7 @@ if (!function_exists('themeAsset')) {
     function themeAsset($path)
     {
         $themeName = app('theme')->currentTheme();
-        $path      = config('theme.assets_path') . '/' . $themeName . '/' . ltrim($path, '/');
+        $path = config('theme.assets_path') . '/' . $themeName . '/' . ltrim($path, '/');
         return asset($path);
     }
 }

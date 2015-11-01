@@ -14,12 +14,13 @@ class LaravelThemeServiceProvider extends ServiceProvider
     {
         $this->bootConfig();
         $this->setViewPath();
+        $this->registerAlias();
     }
 
     protected function setViewPath()
     {
-        $defaultView  = $this->app['config']['view.paths'];
-        $route        = new RouteHelper($this->app);
+        $defaultView = $this->app['config']['view.paths'];
+        $route = new RouteHelper($this->app);
         $currentRoute = $route->getCurrentRoute();
         if ($uri = theme_name_match(config('theme.uri', []), $currentRoute->getUri()))
             $curentView = $this->loadPathWithUri($uri);
@@ -27,8 +28,10 @@ class LaravelThemeServiceProvider extends ServiceProvider
             $curentView = $this->loadPathWithPrefix($prefix);
         else
             $curentView = $this->app['theme']->pathTheme();
-        $viewPaths                         = array_merge([$curentView], $defaultView);
-        $this->app['config']['view.paths'] = $viewPaths;
+        if ($curentView) {
+            $viewPaths = array_merge([$curentView], $defaultView);
+            $this->app['config']['view.paths'] = $viewPaths;
+        }
     }
 
     protected function bootConfig()
@@ -45,13 +48,18 @@ class LaravelThemeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(
-            'theme', function ($app){
-            return new Theme(
-                $app
-            );
-        }
-        );
+        $this->app->singleton('theme', function ($app) {
+            return new Theme($app);
+        });
+    }
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return array('theme');
     }
 
     private function loadPathWithUri($uri)
@@ -62,5 +70,13 @@ class LaravelThemeServiceProvider extends ServiceProvider
     private function loadPathWithPrefix($prefix)
     {
         return $this->app['theme']->pathTheme($prefix);
+    }
+
+    private function registerAlias()
+    {
+        if ($this->app['config']['theme']['auto_alias']) {
+            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+            $loader->alias('Theme', ThemeFacade::class);
+        }
     }
 }
