@@ -128,4 +128,23 @@ class Theme
         }
         return $path;
     }
+
+    /**
+     * Get all themes in folder
+     * @param array $except
+     * @param bool|true $config
+     * @return array
+     */
+    public function allTheme($except = [], $config = true)
+    {
+        $except = (array)$except;
+        $themeDirs = glob(base_path($this->config->get('theme.view_path')) . '/*', GLOB_ONLYDIR);
+        array_filter($themeDirs, function (&$value) {
+            if ($path = basename($value)) {
+                $value = $path;
+            }
+        });
+        $excepts = ($config === true) ? array_merge($this->config->get('theme.except_list'), $except) : $except;
+        return array_diff($themeDirs, $excepts);
+    }
 }

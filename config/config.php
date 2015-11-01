@@ -43,5 +43,11 @@ return [
      * */
     'prefix' => [
         'theme_name' => 'prefix_with_regex'
+    ],
+    /*
+     * Danh sách theme bị loại trừ khi lấy tất cả themes (Theme::allTheme())
+     * */
+    'except_list'=>[
+        'another_theme_name'
     ]
 ];
