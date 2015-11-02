@@ -1,4 +1,4 @@
-# Package quản lý theme cho Laravel 5.*
+# Theme Management for Laravel 5.*
 
 > Detect device use package  [serbanghita/Mobile-Detect](https://github.com/serbanghita/Mobile-Detect).
 > If you want to be simple, use a version 1.
@@ -11,7 +11,7 @@
 4. <a href="#structure">Structure</a>
 5. <a href="#usage">Usage</a>
 
-## <a id="introduction"></a>Introduction
+## <a id="introduction">Introduction</a>
 This is package support the management view files and assets under separate folders. Compatible with Laravel 5.*
 
 ## <a href="#installation">Installation</a>
@@ -115,7 +115,7 @@ or use Facade
 Theme::set($themeName);//use facade
 ```
 
-##### Support methods
+### Support methods
 
 ```php
 Theme::client();//return object of MobileDetect
