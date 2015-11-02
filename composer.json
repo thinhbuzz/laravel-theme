@@ -1,10 +1,12 @@
 {
   "name": "buzz/laravel-theme",
-  "description": "Package quản lý theme cho Laravel 5.*",
+  "description": "Theme Management for Laravel 5.*",
   "keywords": [
     "laravel",
     "theme",
     "themes",
+    "theme manager",
+    "theme management",
     "laravel5"
   ],
   "homepage": "https://github.com/thinhbuzz/laravel-theme",
