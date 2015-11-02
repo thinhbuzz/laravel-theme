@@ -5,18 +5,26 @@ use Detection\MobileDetect;
 
 class DetectTheme extends MobileDetect
 {
+    /**
+     * The application instance.
+     *
+     * @var \Illuminate\Contracts\Foundation\Application
+     */
+    protected $app;
 
     /**
      * DetectTheme constructor.
      *
      * @param \Illuminate\Contracts\Foundation\Application $app
+     * @param string $currentTheme
      */
     public function __construct($app, $currentTheme)
     {
+        $this->app = $app;
         parent::__construct();
-        if ($app->config->get('theme.detect')) {
-            if ($this->getTheme() != $currentTheme && !$app->session->get('theme.force'))
-                $app->session->set('theme.name', $this->getTheme());
+        if ($this->app->config->get('theme.detect')) {
+            if ($this->getTheme() != $currentTheme && !$this->app->session->get('theme.force'))
+                $this->app->session->set('theme.name', $this->getTheme());
         }
     }
 
@@ -28,9 +36,9 @@ class DetectTheme extends MobileDetect
     public function getTheme()
     {
         if ($this->isMobile())
-            return config('theme.themes.mobile');
+            return $this->app->config->get('theme.themes.mobile');
         elseif ($this->isTablet())
-            return config('theme.themes.tablet');
-        return config('theme.themes.pc');
+            return $this->app->config->get('theme.themes.tablet');
+        return $this->app->config->get('theme.themes.pc');
     }
 }

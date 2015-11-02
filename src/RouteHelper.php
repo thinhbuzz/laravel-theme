@@ -18,6 +18,7 @@ class RouteHelper
     }
 
     /**
+     * Get current route
      * @return \Illuminate\Routing\Route
      */
     public function getCurrentRoute()

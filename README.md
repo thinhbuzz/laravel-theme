@@ -3,29 +3,25 @@
 > Detect device use package  [serbanghita/Mobile-Detect](https://github.com/serbanghita/Mobile-Detect).
 > If you want to be simple, use a version 1.
 > Note: v2.* switch language to vietnamese
+## Contents
 
-## Cài đặt
-Mở file `composer.json` và thêm vào `require`:
+1. <a href="#introduction">Introduction</a>
+2. <a href="#installation">Installation</a>
+3. <a href="#configuration">Configuration</a>
+4. <a href="#structure">Structure</a>
+5. <a href="#usage">Usage</a>
 
-```json
-{
-    "require": {
-        "buzz/laravel-theme": "2.*"
-    }
-}
+## <a id="introduction"></a>Introduction
+This is package support the management view files and assets under separate folders. Compatible with Laravel 5.*
+
+## <a href="#installation">Installation</a>
+The first run command:
+
+```
+composer require buzz/laravel-theme 2.*
 ```
 
-Hoặc chạy lệnh sau:
-
-```
-composer require buzz/laravel-theme
-```
-
-Chạy lệnh ```composer update``` hoặc ```composer install``` để hoàn thành cài đặt package.
-
-### Setup
-
-Mở file `app/config/app.php` và thêm ServiceProvider
+and then open `config/app.php` add `LaravelThemeServiceProvider` to array `providers`
 
 ```
 'providers' => [
@@ -36,99 +32,100 @@ Mở file `app/config/app.php` và thêm ServiceProvider
     'Buzz\LaravelTheme\LaravelThemeServiceProvider',
 ],
 ```
-Thêm Facade như sau (chỉ phải làm khi `auto_alias => false`):
+
+Add `Theme` alias (when set `auto_alias => false` in theme config):
+
 ```
 'aliases' => [
     //.....
-    'Validator' => 'Illuminate\Support\Facades\Validator,
-    'View'      => 'Illuminate\Support\Facades\View,
+    'Validator' => 'Illuminate\Support\Facades\Validator',
+    'View'      => 'Illuminate\Support\Facades\View',
     //.....
     'Theme' =>  'Buzz\LaravelTheme\ThemeFacade',
 ],
 ```
 
-### Cấu hình
+## <a href="#configuration">Configuration</a>
 
-Tạo file cấu hình ``config/theme.php`` bằng lệnh sau:
+Publish config file `config/theme.php` with command:
 
 ~~~
 php artisan vendor:publish --provider="Buzz\LaravelTheme\LaravelThemeServiceProvider"
 ~~~
 
-hoặc
+## <a href="#usage">Usage</a>
 
-~~~
-php artisan vendor:publish
-~~~
-
-### Cấu trúc
+### Structure
 ##### Assets
+
 ```
 ├── public/
     └── themes/
-        ├── mytheme/
+        ├── theme_name/
         |   ├── js/
         |   ├── css/
         |
-        └── anothertheme/
+        └── another_theme_name/
 
 ```
+
 ##### Views
+
 ```
 ├── resources/
     └── themes/
-        ├── mytheme/
-        |   ├── views/
+        ├── theme_name/
+        |   ├── index.blade.php
+        |   ├── footer.blade.php
         |
-        └── anothertheme/
+        └── another_theme_name/
 
 ```
 
+### Render view
 
-## Sử dụng
-
-### Gọi view
-
-Tương tự như việc sử dụng view mặc định của laravel là dùng ``View::make`` hoặc ``view()``, xem thêm tại [views document](http://laravel.com/docs/5.1/views). Nếu khi gọi view mà view đó không tồn tại trong ``resrouces/themes`` thì sẽ được gọi đến thư mục ``resrouces/views``.
+package does not change the way you render view, you still use the `View::make` or `view()` as default of laravel, read more on [views document](http://laravel.com/docs/5.1/views). If the render view and the view does not exist in the `resources/themes/theme-name`, it will render view in `resources/views`.
 
 ### Theme assets
 
-Dùng ``themeAsset()`` thay cho ``asset()`` khi gọi asses cho theme, ví dụ:
+Use ``themeAsset()`` instead of ``asset()`` when link to assets in theme, example:
 
 ```php
-<link rel="stylesheet" href="{!! themeAsset('css/bootstrapt.css') !!}">
-//render <link rel="stylesheet" href="http://domain/themes/theme-name/css/bootstrapt.css">
+<link rel="stylesheet" href="{!! themeAsset('css/bootstrap.css') !!}">
+//render <link rel="stylesheet" href="http://domain/themes/theme-name/css/bootstrap.css">
 ```
 
-### Thay đổi theme
+### Change current theme
 
-Bạn có thể thay đổi theme bằng các cách sau:
+You can change the theme in the following ways:
 
 ```php
 app('theme')->set($themeName)
 ```
 
-Hoặc
+Or use function helper
 
 ```php
 setTheme($themeName);//function helper
 ```
 
-Hoặc
+or use Facade
 
 ```php
 Theme::set($themeName);//use facade
 ```
 
-##### Các hàm hỗ trợ
+##### Support methods
 
 ```php
-Theme::client();//Trả về 1 đối tượng MobileDetect
-Theme::pathTheme($name);//trả về đường dẫn của thư mục theme hiện tại hoặc theo tên theme truyền vào
-Theme::currentTheme();//trả về tên của theme hiện tại
-Theme::reset();//đặt lại theme mặc định
+Theme::client();//return object of MobileDetect
+Theme::pathTheme($name = null);//return path to current theme or name input
+Theme::currentTheme();//return name of current theme
+Theme::reset();//reset default theme
+Theme::set();//set theme
+Theme::allTheme($except = [], $config = true);//get list theme in folder themes
+themeAsset($name = false);//link to asset current theme or by theme name
+setTheme($name);// change theme by theme name
 ```
 
-
-
-
+> P/s: excuse me my English.

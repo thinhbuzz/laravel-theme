@@ -1,31 +1,31 @@
 <?php
 return [
     /*
-     * Nếu là true, sẽ throw new ThemeNotFoundException nếu theme không tồn tại.
+     * If true, package would throw exception if theme not exist
      * */
     'exception' => false,
     /*
-     * Chỉ định có phải là lần chạy đầu tiên sau khi cài đặt package
+     * If true, package would auto add alias Theme
      * */
     'auto_alias' => true,
     /*
-     * Chỉ định có tự động chuyển đổi giao diện hay không (mobile, tablet, pc)
+     * If true, package would auto detected device (mobile, tablet, pc)
      * */
     'detect' => false,
     /*
-     * Thư mục chứa themes, được tính từ ngang hàng với thư mục app
+     * Directory containing themes, par with app directory
      * */
     'view_path' => 'resources/themes',
     /*
-     * Thư mục chứa assets của theme, được tính từ ngang hàng index.php (nằm trong public)
+     * The theme folder containing assets, par index.php (located in public folder)
      * */
     'assets_path' => 'themes',
     /*
-     * Theme mặc định
+     * Name of default theme
      * */
     'default_theme' => 'web_theme_name',
     /*
-     * Chỉ định theme cho tự động chuyển đổi giao diện
+     * Theme name respective for device when set detect is true
      * */
     'themes' => [
         'mobile' => 'mobile_theme_name',
@@ -33,19 +33,19 @@ return [
         'pc' => 'web_theme_name',
     ],
     /*
-     * Chỉ định theme theo uri, không ảnh hưởng đến theme mặc định
+     * Theme follow uri (does not affect the default theme)
      * */
     'uri' => [
         'theme_name' => 'uri_with_regex'
     ],
     /*
-     * Chỉ định theme theo prefix (sử dụng Route::group), không ảnh hưởng đến theme mặc định
+     * Theme follow prefix (does not affect the default theme)
      * */
     'prefix' => [
         'theme_name' => 'prefix_with_regex'
     ],
     /*
-     * Danh sách theme bị loại trừ khi lấy tất cả themes (Theme::allTheme())
+     * List names excluded when use Theme::allTheme()
      * */
     'except_list'=>[
         'another_theme_name'

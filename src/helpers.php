@@ -1,8 +1,9 @@
 <?php
 if (!function_exists('themeAsset')) {
-    function themeAsset($path)
+    function themeAsset($path, $themeName = false)
     {
-        $themeName = app('theme')->currentTheme();
+        if ($themeName === false)
+            $themeName = app('theme')->currentTheme();
         $path = config('theme.assets_path') . '/' . $themeName . '/' . ltrim($path, '/');
         return asset($path);
     }
