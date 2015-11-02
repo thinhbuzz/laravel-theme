@@ -3,6 +3,7 @@
 > Detect device use package  [serbanghita/Mobile-Detect](https://github.com/serbanghita/Mobile-Detect).
 > If you want to be simple, use a version 1.
 > Note: v2.* switch language to vietnamese
+
 ## Contents
 
 1. <a href="#introduction">Introduction</a>
@@ -11,10 +12,10 @@
 4. <a href="#structure">Structure</a>
 5. <a href="#usage">Usage</a>
 
-## <a id="introduction">Introduction</a>
+## Introduction
 This is package support the management view files and assets under separate folders. Compatible with Laravel 5.*
 
-## <a href="#installation">Installation</a>
+## Installation
 The first run command:
 
 ```
@@ -45,7 +46,7 @@ Add `Theme` alias (when set `auto_alias => false` in theme config):
 ],
 ```
 
-## <a href="#configuration">Configuration</a>
+## Configuration
 
 Publish config file `config/theme.php` with command:
 
@@ -53,7 +54,7 @@ Publish config file `config/theme.php` with command:
 php artisan vendor:publish --provider="Buzz\LaravelTheme\LaravelThemeServiceProvider"
 ~~~
 
-## <a href="#usage">Usage</a>
+## Usage
 
 ### Structure
 ##### Assets
