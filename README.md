@@ -1,8 +1,7 @@
 # Theme Management for Laravel 5.*
 
 > Detect device use package  [serbanghita/Mobile-Detect](https://github.com/serbanghita/Mobile-Detect).
-> If you want to be simple, use a version 1.
-> Note: v2.* switch language to vietnamese
+> If you want to be simple, use a v1.*
 
 ## Contents
 
