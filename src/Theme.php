@@ -38,7 +38,7 @@ class Theme
     public function __construct($app)
     {
         $this->app = $app;
-        $this->config = $this->app->config;
+        $this->config = $this->app['ThemeConfigClass'];
         $this->loadSession();
     }
 

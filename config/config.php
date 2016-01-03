@@ -8,6 +8,7 @@ return [
      * If true, package would auto add alias Theme
      * */
     'auto_alias' => true,
+    'auto_alias_name' => 'Theme',
     /*
      * If true, package would auto detected device (mobile, tablet, pc)
      * */
@@ -49,5 +50,9 @@ return [
      * */
     'except_list'=>[
         'another_theme_name'
-    ]
+    ],
+    /*
+     * Config provider
+     * */
+    'config_provider' => 'LaravelSetting'
 ];

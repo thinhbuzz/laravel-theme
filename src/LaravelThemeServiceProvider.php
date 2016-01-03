@@ -19,18 +19,21 @@ class LaravelThemeServiceProvider extends ServiceProvider
 
     protected function setViewPath()
     {
-        $defaultView = $this->app->config->get('view.paths',[]);
-        $route = new RouteHelper($this->app);
+        $app = $this->app;
+        $defaultView = $app->config->get('view.paths', []);
+        $route = new RouteHelper($app);
         $currentRoute = $route->getCurrentRoute();
-        if ($uri = theme_name_match($this->app->config->get('theme.uri', []), $currentRoute->getUri()))
+        if ($uri = theme_name_match($app['ThemeConfigClass']->get('theme.uri', []), $currentRoute->getUri())) {
             $curentView = $this->loadPathWithUri($uri);
-        elseif ($prefix = theme_name_match($this->app->config->get('theme.prefix', []), $currentRoute->getPrefix()))
+        } elseif ($prefix = theme_name_match($app['ThemeConfigClass']->get('theme.prefix', []), $currentRoute->getPrefix())) {
             $curentView = $this->loadPathWithPrefix($prefix);
-        else
-            $curentView = $this->app->theme->pathTheme();
+        } else {
+            $curentView = $app->theme->pathTheme();
+        }
         if ($curentView) {
             $viewPaths = array_merge([$curentView], $defaultView);
-            $this->app->config->set('view.paths', $viewPaths);
+            $finder = new \Illuminate\View\FileViewFinder($app['files'], $viewPaths);
+            $app['view']->setFinder($finder);
         }
     }
 
@@ -50,6 +53,9 @@ class LaravelThemeServiceProvider extends ServiceProvider
     {
         $this->app->singleton('theme', function ($app) {
             return new Theme($app);
+        });
+        $this->app->singleton('ThemeConfigClass', function ($app) {
+            return (new GetConfigClass($app))->getClass();
         });
     }
 
@@ -75,9 +81,12 @@ class LaravelThemeServiceProvider extends ServiceProvider
 
     private function registerAlias()
     {
-        if ($this->app->config->get('theme.auto_alias', false)) {
-            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-            $loader->alias('Theme', ThemeFacade::class);
+        if ($this->app['ThemeConfigClass']->get('theme.auto_alias', false)) {
+            \Illuminate\Foundation\AliasLoader::getInstance()
+                ->alias(
+                    $this->app['ThemeConfigClass']->get('theme.auto_alias_name', 'Theme'),
+                    ThemeFacade::class
+                );
         }
     }
 }

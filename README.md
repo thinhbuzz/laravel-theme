@@ -1,6 +1,8 @@
 # Theme Management for Laravel 5.*
 
 > Detect device use package  [serbanghita/Mobile-Detect](https://github.com/serbanghita/Mobile-Detect).
+> If you want to be simple, use a version 1.
+> Note: v2.* switch language to vietnamese
 
 ## Contents
 
@@ -126,5 +128,8 @@ Theme::allTheme($except = [], $config = true);//get list theme in folder themes
 themeAsset($name = false);//link to asset current theme or by theme name
 setTheme($name);// change theme by theme name
 ```
+
+### Support other config provider
+By default package use provider ``config`` of laravel, you can change to provider you want by edit config ``'config_provider' => 'provider_name'``
 
 > P/s: excuse me my English.
