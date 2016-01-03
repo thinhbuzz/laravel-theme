@@ -54,5 +54,5 @@ return [
     /*
      * Config provider
      * */
-    'config_provider' => 'LaravelSetting'
+    'config_provider' => 'config'
 ];
