@@ -21,8 +21,7 @@ class LaravelThemeServiceProvider extends ServiceProvider
     {
         $app = $this->app;
         $defaultView = $app->config->get('view.paths', []);
-        $route = new RouteHelper($app);
-        $currentRoute = $route->getCurrentRoute();
+        $currentRoute = (new RouteHelper($app))->getCurrentRoute();
         if ($uri = theme_name_match($app['ThemeConfigClass']->get('theme.uri', []), $currentRoute->getUri())) {
             $curentView = $this->loadPathWithUri($uri);
         } elseif ($prefix = theme_name_match($app['ThemeConfigClass']->get('theme.prefix', []), $currentRoute->getPrefix())) {

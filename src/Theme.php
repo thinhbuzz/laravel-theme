@@ -59,6 +59,7 @@ class Theme
             }
         });
         $excepts = ($config === true) ? array_merge($this->config->get('theme.except_list'), $except) : $except;
+
         return array_diff($themeDirs, $excepts);
     }
 
@@ -77,6 +78,7 @@ class Theme
             else
                 return false;
         }
+
         return $path;
     }
 
@@ -95,6 +97,13 @@ class Theme
      */
     public function currentTheme()
     {
+        $currentRoute = (new RouteHelper($this->app))->getCurrentRoute();
+        if ($themeName = theme_name_match($this->config->get('theme.uri', []), $currentRoute->getUri())) {
+            return $themeName;
+        } elseif ($themeName = theme_name_match($this->config->get('theme.prefix', []), $currentRoute->getPrefix())) {
+            return $themeName;
+        }
+
         return $this->app->session->get('theme.name');
     }
 
@@ -130,6 +139,7 @@ class Theme
     {
         $name = is_null($theme) ? $this->currentTheme() : $theme;
         $path = realpath(base_path($this->config->get('theme.view_path') . '/' . $name));
+
         return $this->checkPathTheme($path);
     }
 
