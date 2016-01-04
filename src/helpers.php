@@ -32,7 +32,7 @@ if (!function_exists('theme_name_match')) {
     function theme_name_match(array $array, $search)
     {
         foreach ($array as $key => $val) {
-            if (preg_match('#' . str_replace('#', '\\#', $val) . '#i', $search))
+            if (preg_match('#' . str_replace('#', '\\#', trim($val, '/')) . '#i', $search))
                 return $key;
         }
         return false;
